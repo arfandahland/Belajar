@@ -4,7 +4,17 @@ import { cn } from "@/lib/utils";
 const Card = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "rounded-lg border border-gray-200 bg-white text-gray-950 shadow-sm",
+      "rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition-all duration-300",
+      className
+    )}
+    {...props}
+  />
+);
+
+const GlassCard = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "glass-dark rounded-2xl p-6 transition-all duration-300 hover:border-white/20 hover:shadow-[0_0_30px_rgba(14,165,233,0.1)]",
       className
     )}
     {...props}
@@ -31,4 +41,4 @@ const CardFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement
   <div className={cn("flex items-center p-6 pt-0", className)} {...props} />
 );
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export { Card, GlassCard, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
