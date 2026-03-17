@@ -1,5 +1,8 @@
+"use client";
+
 import React from 'react';
 import { Button } from '@/components/ui/Button';
+import { motion } from 'framer-motion';
 
 interface HeroProps {
   title: string;
@@ -9,18 +12,54 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
   return (
-    <section className="py-20 px-6 text-center bg-white">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6">
-          {title}
-        </h1>
-        <p className="text-xl text-gray-600 mb-10">
+    <section className="relative py-32 px-6 overflow-hidden bg-mesh min-h-[80vh] flex items-center">
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium tracking-wider text-sky-400 uppercase bg-sky-400/10 border border-sky-400/20 rounded-full">
+            Masa Depan Desain Web
+          </span>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-8 leading-[1.1]">
+            {title.split(' ').map((word, i) => (
+              <span key={i} className={i > 2 ? 'text-gradient' : ''}>
+                {word}{' '}
+              </span>
+            ))}
+          </h1>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+        >
           {subtitle}
-        </p>
-        <div className="flex justify-center gap-4">
-          <Button size="lg">{ctaText}</Button>
-        </div>
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col sm:flex-row justify-center gap-6"
+        >
+          <Button variant="futuristic" size="lg" className="px-10 py-7 text-lg">
+            {ctaText}
+          </Button>
+          <Button variant="outline" size="lg" className="px-10 py-7 text-lg border-white/10 text-white hover:bg-white/5">
+            Pelajari Fitur
+          </Button>
+        </motion.div>
       </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-1/4 -left-20 w-64 h-64 bg-sky-500/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+      <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[120px] animate-pulse-slow"></div>
     </section>
   );
 };
