@@ -7,12 +7,13 @@ import { motion } from 'framer-motion';
 interface HeroProps {
   title: string;
   subtitle: string;
-  ctaText: string;
+  primaryCta: string;
+  secondaryCta: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
+export const Hero: React.FC<HeroProps> = ({ title, subtitle, primaryCta, secondaryCta }) => {
   return (
-    <section className="relative py-32 px-6 overflow-hidden bg-mesh min-h-[80vh] flex items-center">
+    <section className="relative py-48 px-6 overflow-hidden bg-mesh min-h-[90vh] flex items-center">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto relative z-10 text-center">
@@ -48,11 +49,12 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-col sm:flex-row justify-center gap-6"
         >
-          <Button variant="futuristic" size="lg" className="px-10 py-7 text-lg">
-            {ctaText}
+          <Button variant="futuristic" size="lg" className="px-10 py-7 text-lg shadow-sky-500/20 shadow-xl group">
+            {primaryCta}
+            <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
           </Button>
-          <Button variant="outline" size="lg" className="px-10 py-7 text-lg border-white/10 text-white hover:bg-white/5">
-            Pelajari Fitur
+          <Button variant="outline" size="lg" className="px-10 py-7 text-lg border-white/10 text-white hover:bg-white/5 hover:border-sky-500/30 transition-all backdrop-blur-sm">
+            {secondaryCta}
           </Button>
         </motion.div>
       </div>

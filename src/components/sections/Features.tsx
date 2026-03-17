@@ -50,7 +50,7 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {features.map((feature, index) => {
             const IconComponent = (Icons[feature.icon] as React.ElementType) || Icons.Star;

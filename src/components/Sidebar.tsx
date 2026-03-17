@@ -70,10 +70,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium">Teks Tombol (CTA)</label>
+          <label className="text-sm font-medium">Teks Tombol Utama</label>
           <Input
-            value={data.hero.ctaText}
-            onChange={(e) => updateHero('ctaText', e.target.value)}
+            value={data.hero.primaryCta}
+            onChange={(e) => updateHero('primaryCta', e.target.value)}
+          />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Teks Tombol Sekunder</label>
+          <Input
+            value={data.hero.secondaryCta}
+            onChange={(e) => updateHero('secondaryCta', e.target.value)}
           />
         </div>
       </section>

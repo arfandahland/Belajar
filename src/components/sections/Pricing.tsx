@@ -51,7 +51,7 @@ export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
                   <CardTitle className="text-white text-2xl mb-2">{plan.name}</CardTitle>
                   <div className="mt-4 flex flex-col items-center">
                     <span className="text-5xl font-extrabold text-white tracking-tight">{plan.price}</span>
-                    <span className="text-slate-500 mt-2 font-medium">per bulan</span>
+                    <span className="text-slate-500 mt-2 font-medium">Tarif Kompetitif</span>
                   </div>
                 </CardHeader>
                 <CardContent>

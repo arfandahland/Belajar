@@ -1,20 +1,35 @@
 "use client";
 
 import React, { useState } from 'react';
+import { Header } from '@/components/sections/Header';
 import { Hero } from '@/components/sections/Hero';
+import { TrackingWidget } from '@/components/sections/TrackingWidget';
 import { Features } from '@/components/sections/Features';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Pricing } from '@/components/sections/Pricing';
+import { CheckoutSimulation } from '@/components/sections/CheckoutSimulation';
 import { CTA } from '@/components/sections/CTA';
 import { Footer } from '@/components/sections/Footer';
+import { FloatingWhatsApp } from '@/components/sections/FloatingWhatsApp';
 import { Sidebar } from '@/components/Sidebar';
 import * as Icons from 'lucide-react';
 
 export type LandingPageData = {
+  header: {
+    logo: string;
+    navLinks: { label: string; href: string }[];
+    cta: string;
+  };
   hero: {
     title: string;
     subtitle: string;
-    ctaText: string;
+    primaryCta: string;
+    secondaryCta: string;
+  };
+  tracking: {
+    title: string;
+    placeholder1: string;
+    placeholder2: string;
   };
   features: {
     title: string;
@@ -28,6 +43,10 @@ export type LandingPageData = {
     title: string;
     plans: { name: string; price: string; features: string[]; cta: string; popular?: boolean }[];
   };
+  checkout: {
+    title: string;
+    subtitle: string;
+  };
   cta: {
     title: string;
     subtitle: string;
@@ -39,17 +58,33 @@ export type LandingPageData = {
 };
 
 const initialData: LandingPageData = {
+  header: {
+    logo: "LogiNext",
+    navLinks: [
+      { label: "Layanan", href: "#features" },
+      { label: "Tarif", href: "#pricing" },
+      { label: "Lacak", href: "#tracking" },
+    ],
+    cta: "Member Area",
+  },
   hero: {
-    title: "Masa Depan Landing Page Anda Dimulai Di Sini",
-    subtitle: "Ciptakan pengalaman digital yang luar biasa dengan desain futuristik yang memukau dan performa yang tak tertandingi.",
-    ctaText: "Mulai Eksplorasi",
+    title: "Pengiriman Secepat Kilat Keamanan Setinggi Langit",
+    subtitle: "Solusi logistik modern dengan teknologi pelacakan real-time dan jangkauan terluas di seluruh Indonesia.",
+    primaryCta: "Pesan Sekarang",
+    secondaryCta: "Cek Resi/Status",
+  },
+  tracking: {
+    title: "Lacak & Cek Tarif",
+    placeholder1: "Masukkan Nomor Resi...",
+    placeholder2: "Kota Asal ke Kota Tujuan...",
   },
   features: {
-    title: "Teknologi Masa Depan",
+    title: "Kenapa Memilih LogiNext?",
     items: [
-      { title: "Antarmuka Quantum", description: "Desain yang sangat halus dengan animasi 60fps yang memberikan pengalaman premium.", icon: "Cpu" },
-      { title: "Keamanan Enkripsi", description: "Perlindungan data tingkat tinggi untuk memastikan kepercayaan penuh dari pelanggan Anda.", icon: "ShieldCheck" },
-      { title: "Analitik AI", description: "Wawasan cerdas yang didukung AI untuk membantu Anda mengoptimalkan konversi secara real-time.", icon: "BarChart3" },
+      { title: "Kecepatan Kilat", description: "Pengiriman sameday dan instant untuk wilayah kota besar dengan jaminan tepat waktu.", icon: "Zap" },
+      { title: "WA Bot 24/7", description: "Asisten AI kami siap membantu tracking dan info tarif kapanpun via WhatsApp.", icon: "MessageSquare" },
+      { title: "Keamanan Maksimal", description: "Setiap paket dilindungi asuransi dan segel keamanan digital berstandar global.", icon: "ShieldCheck" },
+      { title: "Jangkauan Luas", description: "Menjangkau hingga pelosok terdalam nusantara dengan armada modern.", icon: "Globe" },
     ],
   },
   testimonials: {
@@ -61,17 +96,21 @@ const initialData: LandingPageData = {
     ],
   },
   pricing: {
-    title: "Investasi Untuk Masa Depan",
+    title: "Tarif Rute Terpopuler",
     plans: [
-      { name: "Visionary", price: "Gratis", features: ["3 Landing Page", "Domain .tech Gratis", "Support Standar"], cta: "Mulai Sekarang" },
-      { name: "Innovation", price: "Rp 249rb", features: ["Unlimited Project", "Custom Domain", "Prioritas Support", "Advanced Analytics", "AI Assistant"], cta: "Pilih Innovation", popular: true },
-      { name: "Galaxy", price: "Kontak", features: ["Enterprise Solution", "Dedicated Server", "Custom Animation", "White-label Service"], cta: "Hubungi Kami" },
+      { name: "Jakarta - Surabaya", price: "Rp 15.000", features: ["Estimasi 1-2 Hari", "Asuransi Dasar", "Lacak Real-time"], cta: "Pesan Rute Ini" },
+      { name: "Jakarta - Medan", price: "Rp 35.000", features: ["Estimasi 2-3 Hari", "Asuransi Premium", "Lacak Real-time", "Door to Door"], cta: "Pesan Rute Ini", popular: true },
+      { name: "Jakarta - Makassar", price: "Rp 45.000", features: ["Estimasi 3-4 Hari", "Asuransi Premium", "Lacak Real-time", "Heavy Cargo"], cta: "Pesan Rute Ini" },
     ],
   },
+  checkout: {
+    title: "Selesaikan Pemesanan",
+    subtitle: "Lengkapi data pengiriman dan pilih metode pembayaran favorit Anda.",
+  },
   cta: {
-    title: "Siap Untuk Memimpin Industri?",
-    subtitle: "Bergabunglah dengan para pemimpin masa depan dan bangun brand Anda sekarang.",
-    ctaText: "Luncurkan Sekarang",
+    title: "Mulai Pengiriman Anda Hari Ini",
+    subtitle: "Nikmati kemudahan logistik masa depan dalam genggaman Anda.",
+    ctaText: "Kirim Paket Sekarang",
   },
   footer: {
     companyName: "Futurix",
@@ -89,14 +128,18 @@ export default function Home() {
       </div>
 
       {/* Preview Area */}
-      <div className="flex-1 h-screen overflow-y-auto scroll-smooth">
+      <div className="flex-1 h-screen overflow-y-auto scroll-smooth relative">
         <div className="bg-[#020617] min-h-screen">
+          <Header {...data.header} />
           <Hero {...data.hero} />
+          <TrackingWidget {...data.tracking} />
           <Features title={data.features.title} features={data.features.items} />
           <Testimonials title={data.testimonials.title} testimonials={data.testimonials.items} />
           <Pricing title={data.pricing.title} plans={data.pricing.plans} />
+          <CheckoutSimulation {...data.checkout} />
           <CTA {...data.cta} />
           <Footer companyName={data.footer.companyName} />
+          <FloatingWhatsApp />
         </div>
       </div>
     </div>
