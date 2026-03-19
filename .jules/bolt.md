@@ -1,0 +1,3 @@
+## 2025-05-15 - Memoizing Landing Page Sections
+**Learning:** In a real-time landing page builder, editing one section (e.g., the Hero title) causes the entire page to re-render. Since each section is relatively independent and driven by its own portion of the state, wrapping them in `React.memo` effectively isolates these re-renders. This is particularly important as the number of sections or the complexity of their internal rendering grows.
+**Action:** Always wrap preview section components in `React.memo` to ensure that only the section currently being edited is re-rendered in the live preview area.
