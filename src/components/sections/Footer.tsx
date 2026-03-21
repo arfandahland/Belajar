@@ -4,7 +4,11 @@ interface FooterProps {
   companyName: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ companyName }) => {
+/**
+ * ⚡ OPTIMIZATION: React.memo prevents the Footer from re-rendering
+ * when the large state object in the parent (Home) is modified.
+ */
+export const Footer: React.FC<FooterProps> = React.memo(({ companyName }) => {
   return (
     <footer className="py-12 px-6 border-t border-gray-200 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -17,4 +21,6 @@ export const Footer: React.FC<FooterProps> = ({ companyName }) => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';

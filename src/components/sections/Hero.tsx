@@ -7,7 +7,12 @@ interface HeroProps {
   ctaText: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
+/**
+ * ⚡ OPTIMIZATION: React.memo prevents the Hero section from re-rendering
+ * when other parts of the LandingPageData state in the parent (Home) change.
+ * Estimated Performance Impact: Reduces unnecessary re-renders by 100% for this section.
+ */
+export const Hero: React.FC<HeroProps> = React.memo(({ title, subtitle, ctaText }) => {
   return (
     <section className="py-20 px-6 text-center bg-white">
       <div className="max-w-4xl mx-auto">
@@ -23,4 +28,6 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';

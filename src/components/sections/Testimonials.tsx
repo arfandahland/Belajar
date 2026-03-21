@@ -12,7 +12,12 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
+/**
+ * ⚡ OPTIMIZATION: React.memo ensures that this Testimonials section only
+ * re-renders if the list of testimonials or title actually change.
+ * Estimated Performance Impact: High; avoids card layout recalculations.
+ */
+export const Testimonials: React.FC<TestimonialsProps> = React.memo(({ title, testimonials }) => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,4 +38,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';

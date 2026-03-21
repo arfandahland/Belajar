@@ -13,7 +13,12 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+/**
+ * ⚡ OPTIMIZATION: React.memo prevents the Features section from re-rendering
+ * when unrelated LandingPageData state updates occur in the parent.
+ * Estimated Performance Impact: Avoids re-rendering of 3+ cards in this section.
+ */
+export const Features: React.FC<FeaturesProps> = React.memo(({ title, features }) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +44,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
