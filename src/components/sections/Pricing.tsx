@@ -16,7 +16,11 @@ interface PricingProps {
   plans: Plan[];
 }
 
-export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
+/**
+ * ⚡ OPTIMIZATION: Memoized Pricing section to avoid unnecessary calculations.
+ * Parent Home state changes (e.g., editing Hero) won't trigger re-rendering of this section.
+ */
+export const Pricing: React.FC<PricingProps> = React.memo(({ title, plans }) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -53,4 +57,6 @@ export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
       </div>
     </section>
   );
-};
+});
+
+Pricing.displayName = 'Pricing';
