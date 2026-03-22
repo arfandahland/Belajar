@@ -1,0 +1,3 @@
+## 2025-05-15 - Optimizing Real-time Editor Rendering with React.memo
+**Learning:** In applications using a centralized state for a real-time builder (like `src/app/page.tsx`), every change to a single field (e.g., Hero title) triggers a re-render of the entire preview. Without memoization, all components in the preview are re-rendered, even if their data hasn't changed.
+**Action:** Use `React.memo` to wrap section components in the preview area to ensure they only re-render when their specific props are updated. This improves the responsiveness of the editor by reducing unnecessary DOM updates and calculation overhead during real-time editing. Always set `displayName` for clarity in DevTools.
