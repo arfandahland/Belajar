@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
 
 interface Testimonial {
@@ -12,7 +12,12 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
+/**
+ * ⚡ OPTIMIZATION: React.memo
+ * Prevents Testimonials from re-rendering when other sections are updated.
+ * Expected Impact: Reduces computation and render time for the testimonials grid.
+ */
+export const Testimonials = memo(({ title, testimonials }: TestimonialsProps) => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,4 +38,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';
