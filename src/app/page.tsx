@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useDeferredValue } from 'react';
 import { Hero } from '@/components/sections/Hero';
 import { Features } from '@/components/sections/Features';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -80,6 +80,16 @@ const initialData: LandingPageData = {
 export default function Home() {
   const [data, setData] = useState<LandingPageData>(initialData);
 
+  /**
+   * ⚡ BOLT OPTIMIZATION:
+   * useDeferredValue is used to prioritize UI responsiveness in the Sidebar.
+   * By deferring the update of the Preview area, we ensure that keystrokes
+   * in the Input/Textarea fields remain snappy, while the potentially
+   * expensive re-render of the landing page sections is handled as a
+   * low-priority background task.
+   */
+  const deferredData = useDeferredValue(data);
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
       {/* Sidebar - Controls */}
@@ -90,12 +100,12 @@ export default function Home() {
       {/* Preview Area */}
       <div className="flex-1 h-screen overflow-y-auto">
         <div className="bg-white shadow-2xl min-h-screen">
-          <Hero {...data.hero} />
-          <Features title={data.features.title} features={data.features.items} />
-          <Testimonials title={data.testimonials.title} testimonials={data.testimonials.items} />
-          <Pricing title={data.pricing.title} plans={data.pricing.plans} />
-          <CTA {...data.cta} />
-          <Footer companyName={data.footer.companyName} />
+          <Hero {...deferredData.hero} />
+          <Features title={deferredData.features.title} features={deferredData.features.items} />
+          <Testimonials title={deferredData.testimonials.title} testimonials={deferredData.testimonials.items} />
+          <Pricing title={deferredData.pricing.title} plans={deferredData.pricing.plans} />
+          <CTA {...deferredData.cta} />
+          <Footer companyName={deferredData.footer.companyName} />
         </div>
       </div>
     </div>
