@@ -13,7 +13,9 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+// BOLT OPTIMIZATION: Memoize section components to prevent unnecessary
+// re-renders when other parts of the landing page data change.
+export const Features = React.memo<FeaturesProps>(({ title, features }) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +41,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
