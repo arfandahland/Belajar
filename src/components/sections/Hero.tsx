@@ -7,7 +7,13 @@ interface HeroProps {
   ctaText: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
+/**
+ * ⚡ BOLT OPTIMIZATION: React.memo
+ * Prevents Hero from re-rendering unless its specific props change.
+ * In the context of the landing page builder, this prevents re-renders
+ * when other sections (Features, Pricing, etc.) are being edited.
+ */
+export const Hero = React.memo<HeroProps>(({ title, subtitle, ctaText }) => {
   return (
     <section className="py-20 px-6 text-center bg-white">
       <div className="max-w-4xl mx-auto">
@@ -23,4 +29,6 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
