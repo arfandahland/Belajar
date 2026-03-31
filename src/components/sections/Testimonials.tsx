@@ -12,7 +12,11 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
+/**
+ * ⚡ BOLT OPTIMIZATION: React.memo
+ * Prevents Testimonials from re-rendering when unrelated state in the parent changes.
+ */
+export const Testimonials = React.memo<TestimonialsProps>(({ title, testimonials }) => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,4 +37,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';

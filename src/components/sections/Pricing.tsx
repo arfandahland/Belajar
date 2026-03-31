@@ -16,7 +16,11 @@ interface PricingProps {
   plans: Plan[];
 }
 
-export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
+/**
+ * ⚡ BOLT OPTIMIZATION: React.memo
+ * Prevents Pricing from re-rendering when unrelated state in the parent changes.
+ */
+export const Pricing = React.memo<PricingProps>(({ title, plans }) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -53,4 +57,6 @@ export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
       </div>
     </section>
   );
-};
+});
+
+Pricing.displayName = 'Pricing';

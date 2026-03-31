@@ -13,7 +13,12 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+/**
+ * ⚡ BOLT OPTIMIZATION: React.memo
+ * Prevents Features from re-rendering unless its specific props change.
+ * This is crucial as Features contains multiple card components and icons.
+ */
+export const Features = React.memo<FeaturesProps>(({ title, features }) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +44,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
