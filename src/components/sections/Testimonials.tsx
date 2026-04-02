@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
 
 interface Testimonial {
@@ -12,7 +12,11 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
+/**
+ * ⚡ BOLT OPTIMIZATION: React.memo
+ * Prevents unnecessary re-renders when other sections of the landing page data are updated.
+ */
+export const Testimonials = memo(({ title, testimonials }: TestimonialsProps) => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,4 +37,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';
