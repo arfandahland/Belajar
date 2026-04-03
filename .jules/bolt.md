@@ -1,0 +1,3 @@
+## 2025-05-15 - Optimizing Real-time Preview in Landing Page Builder
+**Learning:** In a real-time editor with a split-screen preview, updating a single piece of state can trigger expensive re-renders across all preview sections. Using `useDeferredValue` for the preview data allows the UI thread to remain responsive for user input in the editor, while `React.memo` ensures that only the affected sections are actually re-rendered when the deferred update is processed.
+**Action:** Always consider `useDeferredValue` and `React.memo` when building real-time editors or dashboards with complex previews.
