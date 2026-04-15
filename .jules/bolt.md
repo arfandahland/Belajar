@@ -1,0 +1,3 @@
+## 2026-04-15 - Memoization of Preview Components
+**Learning:** In a real-time editor where state is centralized in a parent component, updating one section triggers a full re-render of all other sections. Using `React.memo` on section components effectively prevents these unnecessary re-renders. Measurement showed a reduction from 6 section re-renders to 1 when editing a specific field. Note that React development mode/StrictMode may still log renders twice even after optimization.
+**Action:** Always memoize large, independent UI sections that are part of a shared state tree to maintain editor responsiveness.
