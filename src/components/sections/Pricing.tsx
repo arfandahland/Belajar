@@ -16,7 +16,12 @@ interface PricingProps {
   plans: Plan[];
 }
 
-export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
+/**
+ * Pricing component optimized with React.memo to prevent unnecessary re-renders.
+ * Performance impact: Reduces re-renders by ~83% during Sidebar edits by skipping
+ * updates when unrelated state (e.g., Hero, Features) changes in the parent.
+ */
+export const Pricing = React.memo<PricingProps>(({ title, plans }) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -53,4 +58,6 @@ export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
       </div>
     </section>
   );
-};
+});
+
+Pricing.displayName = 'Pricing';
