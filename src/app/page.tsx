@@ -8,7 +8,6 @@ import { Pricing } from '@/components/sections/Pricing';
 import { CTA } from '@/components/sections/CTA';
 import { Footer } from '@/components/sections/Footer';
 import { Sidebar } from '@/components/Sidebar';
-import * as Icons from 'lucide-react';
 
 export type LandingPageData = {
   hero: {
@@ -18,7 +17,7 @@ export type LandingPageData = {
   };
   features: {
     title: string;
-    items: { title: string; description: string; icon: keyof typeof Icons }[];
+    items: { title: string; description: string; icon: string }[];
   };
   testimonials: {
     title: string;
