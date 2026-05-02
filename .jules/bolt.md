@@ -1,0 +1,3 @@
+## 2025-05-15 - React.memo Optimization in Real-time Editor
+**Learning:** In this real-time builder, the parent `Home` component manages the entire landing page state. Any update to a single field (e.g., Hero title) triggers a re-render of all preview sections because they are passed props that reference the state object. Wrapping section components in `React.memo` effectively skips their re-renders when their specific slice of the state hasn't changed. Note: In development mode (StrictMode), components may still log "Render" twice even after memoization, which is expected behavior and should be factored into performance baselines.
+**Action:** Always use `React.memo` for preview sections in real-time editors to maintain high responsiveness during content editing.
