@@ -1,6 +1,13 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import * as Icons from 'lucide-react';
+import { Smartphone, Search, Zap, Star } from 'lucide-react';
+
+const Icons = {
+  Smartphone,
+  Search,
+  Zap,
+  Star,
+} as const;
 
 interface Feature {
   title: string;
@@ -13,7 +20,7 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+export const Features = React.memo(({ title, features }: FeaturesProps) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +46,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
