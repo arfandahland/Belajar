@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Check } from 'lucide-react';
@@ -16,7 +16,11 @@ interface PricingProps {
   plans: Plan[];
 }
 
-export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
+/**
+ * Pricing section component memoized to prevent unnecessary re-renders
+ * during real-time content editing in the Sidebar.
+ */
+export const Pricing = memo(({ title, plans }: PricingProps) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -53,4 +57,6 @@ export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
       </div>
     </section>
   );
-};
+});
+
+Pricing.displayName = 'Pricing';
