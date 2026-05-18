@@ -13,7 +13,12 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+/**
+ * Features section of the landing page.
+ * Memoized to prevent re-renders when other sections are edited in the Sidebar.
+ */
+export const Features: React.FC<FeaturesProps> = React.memo(({ title, features }) => {
+
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +44,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
