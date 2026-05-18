@@ -8,7 +8,11 @@ interface SidebarProps {
   setData: React.Dispatch<React.SetStateAction<LandingPageData>>;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
+/**
+ * Sidebar component for editing the landing page content.
+ * Memoized to prevent re-renders when the parent component updates state.
+ */
+export const Sidebar: React.FC<SidebarProps> = React.memo(({ data, setData }) => {
   const updateHero = (field: keyof LandingPageData['hero'], value: string) => {
     setData((prev) => ({
       ...prev,
@@ -154,4 +158,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
       </div>
     </div>
   );
-};
+});
+
+Sidebar.displayName = 'Sidebar';
