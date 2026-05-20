@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { LandingPageData } from '@/app/page';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
@@ -8,7 +8,10 @@ interface SidebarProps {
   setData: React.Dispatch<React.SetStateAction<LandingPageData>>;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
+/**
+ * Sidebar component optimized with React.memo to prevent unnecessary re-renders.
+ */
+export const Sidebar = memo(({ data, setData }: SidebarProps) => {
   const updateHero = (field: keyof LandingPageData['hero'], value: string) => {
     setData((prev) => ({
       ...prev,
@@ -154,4 +157,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
       </div>
     </div>
   );
-};
+});
+
+Sidebar.displayName = 'Sidebar';
