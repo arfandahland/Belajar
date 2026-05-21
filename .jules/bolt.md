@@ -1,0 +1,3 @@
+## 2026-05-21 - Component Memoization in Centralized State Builders
+**Learning:** In builder-style applications where state is centralized at the top level, every keystroke in a sidebar control triggers a full application re-render. React.memo is highly effective here because section data references only change when that specific section is edited. Refactoring wildcard icon imports (e.g., lucide-react) to named imports with a static map is essential to enable tree-shaking and reduce bundle size in these highly visual apps.
+**Action:** Always memoize preview sections and refactor wildcard icon imports early in builder-like architectures.

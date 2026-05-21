@@ -7,7 +7,7 @@ export interface ButtonProps
   size?: "sm" | "md" | "lg";
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", ...props }, ref) => {
     const variants = {
       primary: "bg-blue-600 text-white hover:bg-blue-700",
@@ -35,7 +35,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       />
     );
   }
-);
+));
 Button.displayName = "Button";
 
 export { Button };
