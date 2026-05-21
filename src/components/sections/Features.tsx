@@ -1,11 +1,19 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import * as Icons from 'lucide-react';
+import { Smartphone, Search, Zap, Star } from 'lucide-react';
+import { IconName } from '@/app/page';
+
+const iconMap = {
+  Smartphone,
+  Search,
+  Zap,
+  Star,
+};
 
 interface Feature {
   title: string;
   description: string;
-  icon: keyof typeof Icons;
+  icon: IconName;
 }
 
 interface FeaturesProps {
@@ -13,14 +21,14 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+export const Features = React.memo(({ title, features }: FeaturesProps) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">{title}</h2>
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => {
-            const IconComponent = (Icons[feature.icon] as React.ElementType) || Icons.Star;
+            const IconComponent = iconMap[feature.icon] || iconMap.Star;
             return (
               <Card key={index} className="border-none shadow-md">
                 <CardHeader>
@@ -39,4 +47,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
