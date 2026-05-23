@@ -8,7 +8,7 @@ interface SidebarProps {
   setData: React.Dispatch<React.SetStateAction<LandingPageData>>;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
+export const Sidebar = React.memo(({ data, setData }: SidebarProps) => {
   const updateHero = (field: keyof LandingPageData['hero'], value: string) => {
     setData((prev) => ({
       ...prev,
@@ -154,4 +154,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ data, setData }) => {
       </div>
     </div>
   );
-};
+});
+
+Sidebar.displayName = 'Sidebar';
