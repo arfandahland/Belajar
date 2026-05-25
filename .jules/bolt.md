@@ -1,0 +1,3 @@
+## 2025-05-14 - Optimized Landing Page Section Re-renders
+**Learning:** In a builder-style application with a centralized state, any update to one part of the data (like the Hero title) causes the entire page to re-render. Since each section (Hero, Features, Pricing, etc.) is conceptually independent and only depends on its specific slice of data, they are perfect candidates for `React.memo`. By using memoization, we ensure that an edit to the Hero section does not trigger expensive re-renders for the Features, Pricing, or Testimonials sections.
+**Action:** Always wrap independent UI sections in `React.memo` when they consume props from a shared global/parent state that updates frequently.
