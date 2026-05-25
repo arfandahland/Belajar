@@ -7,7 +7,11 @@ interface CTAProps {
   ctaText: string;
 }
 
-export const CTA: React.FC<CTAProps> = ({ title, subtitle, ctaText }) => {
+/**
+ * CTA component optimized with React.memo.
+ * Prevents re-rendering during real-time updates to other parts of the page.
+ */
+export const CTA = React.memo<CTAProps>(({ title, subtitle, ctaText }) => {
   return (
     <section className="py-20 px-6 bg-blue-600 text-white text-center">
       <div className="max-w-4xl mx-auto">
@@ -19,4 +23,6 @@ export const CTA: React.FC<CTAProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+CTA.displayName = 'CTA';
