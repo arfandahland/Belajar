@@ -1,0 +1,3 @@
+## 2026-06-01 - Centralized State Re-render Bottleneck in Builder Apps
+**Learning:** In builder-style applications where a single state object (e.g., `LandingPageData`) controls multiple UI sections, every keystroke in the sidebar triggers a full re-render of all preview components. While React 19 is fast, this scales poorly as the number of sections or complexity of components grows.
+**Action:** Use `React.memo` for top-level section components that receive discrete slices of the centralized state. This ensures that only the section being edited re-renders, reducing unnecessary work by N-1 sections.
