@@ -1,0 +1,3 @@
+## 2026-05-31 - Centralized State Re-render Bottleneck
+**Learning:** In builder-style applications where a single large state object in a parent component (like `Home` in `page.tsx`) is modified via a Sidebar, all child components (sections like `Hero`, `Features`, etc.) re-render on every keystroke by default. In development mode with React 19, this can result in multiple renders (e.g., 4) per keystroke for each section.
+**Action:** Wrap independent UI sections in `React.memo` to ensure they only re-render when their specific slice of data changes. This reduces the render count for non-affected sections to 0 during Sidebar edits, significantly improving real-time editing performance.
