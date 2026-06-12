@@ -1,0 +1,3 @@
+## 2026-06-08 - Centralized State Re-render Bottleneck
+**Learning:** In builder-style applications where a central state object drives multiple UI sections, every keystroke in the editor (Sidebar) triggers a full re-render of all preview sections. While React is fast, as sections grow in complexity (e.g., Lucide icon rendering, mapping through arrays), this creates noticeable input lag.
+**Action:** Use `React.memo` for independent UI sections that only depend on a subset of the global state. This limits re-renders to only the section being edited, significantly improving editor responsiveness.
