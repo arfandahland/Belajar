@@ -1,0 +1,3 @@
+## 2025-06-13 - [Memoizing Preview Sections in Builder App]
+**Learning:** In applications where a single root state object (like `LandingPageData`) is modified via a sidebar editor, every keystroke triggers a full re-render of all child components that consume or are children of the state holder. Wrapping individual preview sections in `React.memo` effectively isolates them from unrelated state changes, reducing re-render overhead from O(N) to O(1) for most interactions.
+**Action:** Always wrap independent UI sections in `React.memo` when they are part of a real-time preview system driven by a centralized state.
