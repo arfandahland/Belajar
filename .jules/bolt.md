@@ -1,0 +1,3 @@
+## 2025-06-13 - Centralized State Re-render Bottleneck
+**Learning:** In builder-style applications where a single large state object (e.g., `LandingPageData`) is managed at the root and passed down to multiple independent UI sections, every keystroke in a sidebar editor causes a full re-render of the entire page preview. Even if only one section's data is changing, all other sections re-render because their parent (`Home`) re-renders.
+**Action:** Use `React.memo` for top-level section components. Since the parent state updates sub-objects immutably, the object references for unchanged sections remain stable, allowing `React.memo` to effectively skip redundant re-renders and significantly reduce input lag in the editor.
