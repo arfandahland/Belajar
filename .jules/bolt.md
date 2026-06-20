@@ -1,0 +1,3 @@
+## 2025-06-13 - [Centralized State Re-render Pattern in Builder Apps]
+**Learning:** In builder-style applications where a single state object governs multiple UI sections, every keystroke in the sidebar triggers a full re-render of the entire preview area. React 19's development mode double-renders components, amplifying this bottleneck. React.memo is highly effective here because the sidebar updates are typically localized to one section at a time, allowing other sections to skip re-rendering entirely when using immutable state updates.
+**Action:** Always check for centralized state patterns in "editors" or "builders" and apply React.memo to independent preview components early to maintain a fluid editing experience.
