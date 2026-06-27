@@ -1,0 +1,3 @@
+## 2025-06-22 - Centralized State Re-render Bottleneck
+**Learning:** In builder-style applications where the entire page state is managed in a central parent component, every keystroke in the sidebar triggers a full re-render of all preview sections if they are not memoized. React 19's development mode double-renders components, making this bottleneck even more pronounced (12 renders for 6 sections per keystroke).
+**Action:** Always wrap preview section components in `React.memo` when they receive props derived from a large shared state object. Use `displayName` for better devtools visibility and provide comments explaining the memoization.
