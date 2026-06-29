@@ -12,7 +12,11 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
+/**
+ * Testimonials component memoized to prevent redundant re-renders when other sections
+ * of the landing page data change.
+ */
+export const Testimonials = React.memo(({ title, testimonials }: TestimonialsProps) => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,4 +37,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';
