@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from '@/components/ui/Button';
 
 interface HeroProps {
@@ -7,7 +7,12 @@ interface HeroProps {
   ctaText: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
+/**
+ * Memoized Hero component to prevent redundant re-renders when other sections
+ * of the landing page are being edited in the Sidebar.
+ * Performance impact: Reduces re-renders from O(N) to O(1) during live editing.
+ */
+export const Hero = memo(({ title, subtitle, ctaText }: HeroProps) => {
   return (
     <section className="py-20 px-6 text-center bg-white">
       <div className="max-w-4xl mx-auto">
@@ -23,4 +28,6 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
