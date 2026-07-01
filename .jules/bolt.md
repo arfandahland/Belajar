@@ -1,0 +1,3 @@
+## 2025-06-22 - [React.memo for Sectional Components]
+**Learning:** In a landing page builder with a centralized state, every keystroke in the sidebar triggers a full re-render of all preview sections if not memoized. This leads to input lag as the number of sections increases. React.memo effectively isolates these sections because the state update (e.g., updating one section's title) preserves the object references for other sections.
+**Action:** Always memoize sectional components in builder-like architectures where state is hoisted to a common parent but components only consume specific sub-slices of that state.
