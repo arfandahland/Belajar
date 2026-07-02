@@ -1,0 +1,3 @@
+## 2025-06-22 - Optimizing re-renders in Landing Page Builder
+**Learning:** In a centralized state architecture where the entire page data is managed at the top level, every keystroke in the sidebar triggers a re-render of all page sections. React 19's development mode double-renders components, amplifying this bottleneck (12 renders for 6 sections).
+**Action:** Use `React.memo` for sectional preview components (Hero, Features, etc.) to ensure that only the section being modified re-renders. This reduces re-renders from O(N) to O(1) per interaction, significantly improving the real-time editing experience.
