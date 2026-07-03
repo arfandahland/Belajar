@@ -1,0 +1,3 @@
+## 2025-06-22 - [Optimized Landing Page Builder with React.memo and Tree-shaking]
+**Learning:** In a builder architecture where a single state object in the parent (Home) is updated frequently, all child sections re-render unless memoized. React 19's development mode double-renders components, which can amplify the perceived lag during real-time editing. Additionally, wildcard imports from 'lucide-react' significantly increase bundle size; using a local IconMap with named imports allows for both dynamic icon selection and efficient tree-shaking.
+**Action:** Always memoize sectional components in builder apps that pass down subset of props from a centralized state. Prefer explicit icon mappings over wildcard imports for icon libraries to ensure minimal bundle size.
