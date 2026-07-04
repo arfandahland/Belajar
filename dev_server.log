@@ -1,14 +1,7 @@
-
-> landing-page-builder@0.1.0 dev
-> next dev
-
 ▲ Next.js 16.1.7 (Turbopack)
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.2:3000
 
 ✓ Starting...
-✓ Ready in 1054ms
-○ Compiling / ...
- GET / 200 in 19.0s (compile: 18.1s, render: 869ms)
- GET / 200 in 91ms (compile: 5ms, render: 86ms)
- GET / 200 in 1114ms (compile: 343ms, render: 771ms)
+✓ Ready in 1086ms
+ GET / 200 in 1756ms (compile: 1085ms, render: 672ms)
