@@ -13,7 +13,12 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+/**
+ * Features section of the landing page.
+ * Optimized with React.memo to prevent unnecessary re-renders when other sections
+ * are being edited in the Sidebar. Reduces re-renders from O(N) to O(1) during live editing.
+ */
+export const Features = React.memo(({ title, features }: FeaturesProps) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +44,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
