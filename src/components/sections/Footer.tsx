@@ -4,7 +4,11 @@ interface FooterProps {
   companyName: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ companyName }) => {
+export const Footer = React.memo(({ companyName }: FooterProps) => {
+  /*
+    Bolt Optimization: Memoized to prevent re-renders when other sections
+    in the builder are updated. Reduces re-renders from O(N) to O(1).
+  */
   return (
     <footer className="py-12 px-6 border-t border-gray-200 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -17,4 +21,6 @@ export const Footer: React.FC<FooterProps> = ({ companyName }) => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';

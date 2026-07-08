@@ -7,7 +7,11 @@ interface HeroProps {
   ctaText: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
+export const Hero = React.memo(({ title, subtitle, ctaText }: HeroProps) => {
+  /*
+    Bolt Optimization: Memoized to prevent re-renders when other sections
+    in the builder are updated. Reduces re-renders from O(N) to O(1).
+  */
   return (
     <section className="py-20 px-6 text-center bg-white">
       <div className="max-w-4xl mx-auto">
@@ -23,4 +27,6 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';

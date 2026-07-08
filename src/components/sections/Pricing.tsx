@@ -16,7 +16,11 @@ interface PricingProps {
   plans: Plan[];
 }
 
-export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
+export const Pricing = React.memo(({ title, plans }: PricingProps) => {
+  /*
+    Bolt Optimization: Memoized to prevent re-renders when other sections
+    in the builder are updated. Reduces re-renders from O(N) to O(1).
+  */
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -53,4 +57,6 @@ export const Pricing: React.FC<PricingProps> = ({ title, plans }) => {
       </div>
     </section>
   );
-};
+});
+
+Pricing.displayName = 'Pricing';
