@@ -1,0 +1,3 @@
+## 2025-06-22 - Prevent Unnecessary Section Re-renders in Live Page Builder
+**Learning:** In a live builder architecture with centralized state (`data` object in `page.tsx`), editing one section causes top-level state updates that trigger re-renders across all preview sections. Wrapping section components (`Hero`, `Features`, `Testimonials`, `Pricing`, `CTA`, `Footer`) in `React.memo` prevents unnecessary re-renders for sections whose props remain unchanged.
+**Action:** Always memoize individual section components in builder applications where parent state is updated frequently during user input.
