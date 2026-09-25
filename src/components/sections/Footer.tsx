@@ -4,7 +4,12 @@ interface FooterProps {
   companyName: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ companyName }) => {
+/**
+ * Memoized Footer section to prevent redundant re-renders when other sections
+ * or unrelated state updates occur in the parent builder component.
+ * Reduces re-renders from O(N) to O(1) during live editing in the sidebar.
+ */
+export const Footer = React.memo(function Footer({ companyName }: FooterProps) {
   return (
     <footer className="py-12 px-6 border-t border-gray-200 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -17,4 +22,6 @@ export const Footer: React.FC<FooterProps> = ({ companyName }) => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
