@@ -7,7 +7,12 @@ interface HeroProps {
   ctaText: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
+/**
+ * Memoized Hero section to prevent redundant re-renders when other sections
+ * or unrelated state updates occur in the parent builder component.
+ * Reduces re-renders from O(N) to O(1) during live editing in the sidebar.
+ */
+export const Hero = React.memo(function Hero({ title, subtitle, ctaText }: HeroProps) {
   return (
     <section className="py-20 px-6 text-center bg-white">
       <div className="max-w-4xl mx-auto">
@@ -23,4 +28,6 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
