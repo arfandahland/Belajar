@@ -4,8 +4,10 @@ interface FooterProps {
   companyName: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ companyName }) => {
-  return (
+// Memoized to prevent unnecessary re-renders when other sections are edited in the landing page builder.
+// Expected impact: Reduces re-renders from O(N) to O(1) during live editing.
+export const Footer = React.memo(({ companyName }: FooterProps) => {
+    return (
     <footer className="py-12 px-6 border-t border-gray-200 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-gray-500">© {new Date().getFullYear()} {companyName}. All rights reserved.</p>
@@ -17,4 +19,6 @@ export const Footer: React.FC<FooterProps> = ({ companyName }) => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';

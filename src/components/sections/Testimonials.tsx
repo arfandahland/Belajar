@@ -12,8 +12,10 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
-  return (
+// Memoized to prevent unnecessary re-renders when other sections are edited in the landing page builder.
+// Expected impact: Reduces re-renders from O(N) to O(1) during live editing.
+export const Testimonials = React.memo(({ title, testimonials }: TestimonialsProps) => {
+    return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">{title}</h2>
@@ -33,4 +35,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';

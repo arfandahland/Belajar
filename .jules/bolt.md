@@ -1,0 +1,3 @@
+## 2026-03-17 - Memoize Landing Page Builder Section Components
+**Learning:** In interactive builder apps where state is lifted to a top-level parent component, editing any section updates the parent state, re-rendering all children preview components. Wrapping unchanged section components in `React.memo` reduces re-renders from O(N) to O(1) per user input event.
+**Action:** When working with live-editor or dashboard architectures that hold combined state at the root level, wrap section preview components in `React.memo` and set explicit `displayName` to preserve clean profiling and prevent unnecessary child renders.
