@@ -7,8 +7,10 @@ interface CTAProps {
   ctaText: string;
 }
 
-export const CTA: React.FC<CTAProps> = ({ title, subtitle, ctaText }) => {
-  return (
+// Memoized to prevent unnecessary re-renders when other sections are edited in the landing page builder.
+// Expected impact: Reduces re-renders from O(N) to O(1) during live editing.
+export const CTA = React.memo(({ title, subtitle, ctaText }: CTAProps) => {
+    return (
     <section className="py-20 px-6 bg-blue-600 text-white text-center">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">{title}</h2>
@@ -19,4 +21,6 @@ export const CTA: React.FC<CTAProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+CTA.displayName = 'CTA';

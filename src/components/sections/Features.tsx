@@ -13,8 +13,10 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
-  return (
+// Memoized to prevent unnecessary re-renders when other sections are edited in the landing page builder.
+// Expected impact: Reduces re-renders from O(N) to O(1) during live editing.
+export const Features = React.memo(({ title, features }: FeaturesProps) => {
+    return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">{title}</h2>
@@ -39,4 +41,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';

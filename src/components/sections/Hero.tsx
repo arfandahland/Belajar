@@ -7,8 +7,10 @@ interface HeroProps {
   ctaText: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
-  return (
+// Memoized to prevent unnecessary re-renders when other sections are edited in the landing page builder.
+// Expected impact: Reduces re-renders from O(N) to O(1) during live editing.
+export const Hero = React.memo(({ title, subtitle, ctaText }: HeroProps) => {
+    return (
     <section className="py-20 px-6 text-center bg-white">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6">
@@ -23,4 +25,6 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaText }) => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
