@@ -12,7 +12,8 @@ interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials }) => {
+// Memoize component to prevent redundant re-renders during live editing in Sidebar (reduces preview re-renders from O(N) to O(1))
+export const Testimonials = React.memo(({ title, testimonials }: TestimonialsProps) => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,4 +34,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ title, testimonials 
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = 'Testimonials';

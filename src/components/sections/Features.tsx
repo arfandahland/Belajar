@@ -13,7 +13,8 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
+// Memoize component to prevent redundant re-renders during live editing in Sidebar (reduces preview re-renders from O(N) to O(1))
+export const Features = React.memo(({ title, features }: FeaturesProps) => {
   return (
     <section className="py-20 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -39,4 +40,6 @@ export const Features: React.FC<FeaturesProps> = ({ title, features }) => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
