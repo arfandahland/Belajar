@@ -1,0 +1,3 @@
+## 2025-06-22 - Builder State Updates & Section Re-renders
+**Learning:** In landing page builder architectures with a single state object at the parent level (`Home`), updating any section field creates new state object references causing all child section preview components to re-render. Since parent updates mutate sub-objects immutably, unchanged sections maintain reference equality for props, making `React.memo` an ideal optimization that isolates updates to only the modified section.
+**Action:** Wrap section preview components (`Hero`, `Features`, `Testimonials`, `Pricing`, `CTA`, `Footer`) in `React.memo` and set explicit `displayName`s to prevent unnecessary re-renders during live editing.
